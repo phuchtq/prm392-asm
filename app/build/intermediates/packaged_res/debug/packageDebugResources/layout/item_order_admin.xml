@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:padding="12dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <!-- Mã đơn hàng -->
+        <TextView
+            android:id="@+id/tvOrderId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mã đơn hàng: #12345"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"/>
+
+        <!-- Mã khách hàng -->
+        <TextView
+            android:id="@+id/tvCustomerId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mã khách hàng: cust1"
+            android:textSize="14sp"
+            android:textColor="#555555"
+            android:layout_marginTop="4dp"/>
+
+        <!-- Tổng tiền -->
+        <TextView
+            android:id="@+id/tvTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tổng tiền: 500,000 VND"
+            android:textSize="14sp"
+            android:textColor="@android:color/holo_red_dark"
+            android:layout_marginTop="4dp"/>
+
+        <!-- Địa chỉ giao hàng -->
+        <TextView
+            android:id="@+id/tvShippingAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Địa chỉ: 123 Main St, City"
+            android:textSize="14sp"
+            android:textColor="#555555"
+            android:layout_marginTop="4dp"/>
+
+        <!-- Trạng thái đơn hàng -->
+        <TextView
+            android:id="@+id/tvOrderStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Trạng thái: Đang xử lý"
+            android:textSize="14sp"
+            android:textColor="@android:color/holo_blue_dark"
+            android:layout_marginTop="4dp"/>
+
+        <!-- Nút thay đổi trạng thái -->
+        <Button
+            android:id="@+id/btnChangeStatusOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Vận chuyển đơn hàng"
+            android:backgroundTint="@android:color/holo_orange_dark"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="8dp"/>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

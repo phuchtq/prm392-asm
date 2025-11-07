@@ -1,0 +1,13 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.Theme.MilkStoreMobile_FronEnd" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Màu chủ đạo -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+
+        <!-- Màu nền -->
+        <item name="android:colorBackground">@color/colorBackground</item>
+        <item name="android:textColorPrimary">@color/colorOnBackground</item>
+    </style>
+
+    <style name="Theme.MilkStoreMobile_FronEnd" parent="Base.Theme.MilkStoreMobile_FronEnd" />
+</resources>

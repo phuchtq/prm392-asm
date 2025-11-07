@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp"
+    app:strokeColor="@color/teal_700"
+    app:strokeWidth="1dp"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Hình ảnh sản phẩm tràn viền trên -->
+        <ImageView
+            android:id="@+id/imgMilk"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_milk"
+            android:contentDescription="Ảnh sản phẩm sữa"
+            android:background="@android:color/transparent"
+            android:cropToPadding="false"/>
+
+        <!-- Phần thông tin sản phẩm -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/tvMilkName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Milk Name"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:layout_marginBottom="2dp"/>
+
+            <TextView
+                android:id="@+id/tvMilkPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="250.000đ"
+                android:textColor="@color/teal_700"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:layout_marginBottom="2dp"/>
+
+            <TextView
+                android:id="@+id/tvMilkDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mô tả sản phẩm"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:gravity="center"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:layout_marginBottom="2dp"/>
+
+            <TextView
+                android:id="@+id/tvMilkStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Còn hàng"
+                android:textColor="@color/green"
+                android:textSize="13sp"
+                android:textStyle="italic"
+                android:gravity="center"
+                android:layout_marginBottom="8dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAction"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="Chi tiết"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/colorPrimary"
+                app:cornerRadius="18dp"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

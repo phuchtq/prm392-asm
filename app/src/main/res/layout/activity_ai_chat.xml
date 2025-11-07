@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Ảnh nền -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/chat_background"
+        android:scaleType="centerCrop"
+        android:alpha="0.9" />
+
+    <!-- Toàn bộ nội dung chat -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="12dp">
+
+        <!-- Nút trở về -->
+        <Button
+            android:id="@+id/btnBackToHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quay về trang chính"
+            android:layout_marginBottom="8dp" />
+
+        <!-- RecyclerView để hiển thị đoạn chat -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:clipToPadding="false"
+            android:scrollbars="vertical" />
+
+        <!-- Hoạt ảnh AI đang suy nghĩ -->
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieThinking"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/thinking"
+            android:visibility="gone" />
+
+        <!-- Khu vực nhập tin nhắn -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:elevation="4dp"
+            android:padding="8dp">
+
+            <EditText
+                android:id="@+id/edtMessage"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:hint="Nhập câu hỏi cho AI..."
+                android:padding="10dp"
+                android:textColor="#000"
+                android:maxLines="4"
+                android:inputType="textMultiLine"
+                android:background="@drawable/bg_input_field"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/btnSend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gửi"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:backgroundTint="#2196F3"
+                android:background="@drawable/bg_send_button"
+                android:layout_marginStart="8dp"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/loadingAnimation"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:visibility="gone"
+                app:lottie_autoPlay="false"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/thinking" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

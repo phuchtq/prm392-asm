@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!-- Tin nhắn dạng TextView đơn -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:orientation="horizontal"
+        android:gravity="start">
+
+        <TextView
+            android:id="@+id/tvMessageSingle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_message_ai"
+            android:textColor="#222222"
+            android:textSize="16sp"
+            android:padding="12dp"
+            android:maxWidth="260dp"
+            android:elevation="2dp"
+            android:layout_margin="4dp"
+            android:text="Nói điều này" />
+    </LinearLayout>
+
+    <!-- Tin nhắn đầy đủ với avatar và thời gian -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/imgAvatar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_avatar_placeholder"
+            android:scaleType="centerCrop"
+            android:background="@drawable/bg_avatar_circle"
+            android:clipToOutline="true"
+            android:visibility="gone"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="8dp" />
+
+        <LinearLayout
+            android:id="@+id/messageBubble"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:elevation="2dp"
+            android:orientation="vertical"
+            android:layout_toEndOf="@id/imgAvatar"
+            android:layout_toStartOf="@+id/fake_right_space"
+            android:background="@drawable/bg_message_received">
+
+            <TextView
+                android:id="@+id/tvMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nội dung"
+                android:textSize="16sp"
+                android:textColor="#000"
+                android:maxLines="100"
+                android:lineSpacingExtra="6dp"
+                android:autoLink="web"
+                android:textIsSelectable="true"
+                android:breakStrategy="simple"
+                />
+
+
+
+            <TextView
+                android:id="@+id/tvTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10:00"
+                android:textColor="#888"
+                android:textSize="12sp"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <Space
+            android:id="@+id/fake_right_space"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+</LinearLayout>

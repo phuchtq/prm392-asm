@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MilkStoreMobile_FronEnd</string>
+    <string name="milk">Milk</string>
+    <string name="category">Category</string>
+    <string name="chat">Chat</string>
+    <string name="cart">Cart</string>
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
+    <!-- Các string khác nếu có -->
+</resources>

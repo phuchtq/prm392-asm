@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <!-- Màu chính -->
+    <color name="colorPrimary">#107AE4</color> <!-- Màu xanh bầu trời -->
+    <color name="colorOnPrimary">#FFFFFF</color> <!-- Chữ trắng trên nút -->
+
+    <!-- Màu nền -->
+    <color name="colorBackground">#FFFFFF</color> <!-- Nền trắng -->
+    <color name="colorOnBackground">#000000</color> <!-- Chữ đen -->
+
+    <!-- Màu phụ -->
+    <color name="colorSecondary">#5BCAFD</color> <!-- Xanh nhạt hơn -->
+    <color name="teal_700">#018786</color>
+    <color name="green">#388E3C</color>
+</resources>

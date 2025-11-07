@@ -1,0 +1,75 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:orientation="horizontal"
+    android:background="@android:color/white"
+    android:elevation="2dp">
+
+    <!-- ImageView để hiển thị ảnh sản phẩm -->
+    <ImageView
+        android:id="@+id/imgProduct"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/icon_product"
+        android:layout_marginEnd="10dp"/>
+
+    <!-- Layout chứa thông tin sản phẩm -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtProductName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tên sản phẩm"
+            android:textStyle="bold"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/txtProductPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Giá: 10000 VND"/>
+
+        <TextView
+            android:id="@+id/txtProductQuantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Số lượng: 10"/>
+
+        <TextView
+            android:id="@+id/txtProductDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mô tả: Sữa ngon"/>
+    </LinearLayout>
+
+    <!-- Layout chứa nút sửa và xóa -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="end"
+        android:paddingTop="8dp">
+
+        <ImageView
+            android:id="@+id/btnEditProduct"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="8dp"
+            android:src="@android:drawable/ic_menu_edit"
+            android:tint="@android:color/darker_gray"/>
+
+        <ImageView
+            android:id="@+id/btnDeleteProduct"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@android:drawable/ic_menu_delete"
+            android:tint="@android:color/holo_red_dark"/>
+    </LinearLayout>
+</LinearLayout>

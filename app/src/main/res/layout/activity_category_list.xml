@@ -1,0 +1,29 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Thanh loading khi tải dữ liệu -->
+    <ProgressBar
+        android:id="@+id/progress_bar_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+
+    <!-- RecyclerView hiển thị danh sách -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_category"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/btn_add_cateogry"
+        android:padding="16dp"/>
+
+    <!-- Nút thêm danh mục -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_add_cateogry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:src="@android:drawable/ic_input_add"/>
+</RelativeLayout>
