@@ -79,6 +79,7 @@ public class ProductViewModel extends ViewModel {
             @Override
             public void onResponse(Call<Product> call, Response<Product> response) {
                 isLoading.setValue(false);
+                Log.d("Product View Model", "Create product status: " + response);
                 fetchProducts();
             }
 

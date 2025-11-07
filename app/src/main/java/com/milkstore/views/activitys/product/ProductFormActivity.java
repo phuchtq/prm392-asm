@@ -25,64 +25,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductFormActivity extends AppCompatActivity {
-    private static final int PICK_IMAGE_REQUEST = 1; // Mã request chọn ảnh
+    private static final int PICK_IMAGE_REQUEST = 1;
     private EditText edtProductName, edtProductPrice, edtProductQuantity, edtProductDescription;
     private Spinner spinnerCategory;
     private ImageView imgProduct;
     private Button btnChooseImage, btnSaveProduct;
     private ProductViewModel productViewModel;
-
     private CategoryViewModel cateViewModel;
-
     private List<String> categories;
-
-    private String selectedCate;
+    private String selectedCate = ""; // Initialize with empty string
     private ArrayAdapter<String> categoryAdapter;
-
-    private Uri imageUri; // Biến lưu đường dẫn ảnh đã chọn
+    private Uri imageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_form);
-        spinnerCategory = findViewById(R.id.spinner_category);
-        categories = new ArrayList<>();
 
-// Create adapter FIRST
-        categoryAdapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_spinner_item,
-                categories
-        );
-        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerCategory.setAdapter(categoryAdapter);
-
-// THEN create ViewModel and observe
-                cateViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
-                boolean isNull = cateViewModel != null;
-                Log.d("Product", "Category VIew Model is Null: " + isNull);
-        setCategories();
-
-
-        spinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Object selectedItem = parent.getItemAtPosition(position);
-                if (selectedItem != null) {
-                    selectedCate = selectedItem.toString();
-                } else {
-                    onNothingSelected(parent);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                selectedCate = "";
-            }
-        });
-
-
-        // Ánh xạ các view
+        // Initialize all views ONCE
         edtProductName = findViewById(R.id.edt_product_name);
         edtProductPrice = findViewById(R.id.edt_product_price);
         edtProductQuantity = findViewById(R.id.edt_product_quantity);
@@ -92,82 +52,144 @@ public class ProductFormActivity extends AppCompatActivity {
         btnChooseImage = findViewById(R.id.btn_choose_image);
         btnSaveProduct = findViewById(R.id.btn_save_product);
 
-        //spinnerCategory.setAdapter();
+        // Initialize categories list
+        categories = new ArrayList<>();
+        categories.add("Select category..."); // Add default item
 
+        // Create adapter
+        categoryAdapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                categories
+        );
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCategory.setAdapter(categoryAdapter);
 
-        // Khởi tạo ViewModel
+        // Initialize ViewModels
+        cateViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
         productViewModel = new ViewModelProvider(this).get(ProductViewModel.class);
 
-        // Xử lý sự kiện chọn ảnh
+        boolean isNull = cateViewModel != null;
+        Log.d("Product", "Category ViewModel is Null: " + isNull);
+
+        // Load categories
+        setCategories();
+
+        // Setup spinner listener with null checks
+        spinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                // Add null check
+                Object selectedItem = parent.getItemAtPosition(position);
+                if (selectedItem != null) {
+                    String selected = selectedItem.toString();
+                    // Don't set the placeholder as selected category
+                    if (!selected.equals("Select category...")) {
+                        selectedCate = selected;
+                        Log.d("Product", "Selected category: " + selectedCate);
+                    } else {
+                        selectedCate = "";
+                    }
+                } else {
+                    selectedCate = "";
+                    Log.w("Product", "Selected item is null at position: " + position);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                selectedCate = "";
+            }
+        });
+
+        btnSaveProduct = findViewById(R.id.btn_save_product);
+        btnSaveProduct.setOnClickListener(v -> saveProduct());
+
+        btnChooseImage = findViewById(R.id.btn_choose_image);
         btnChooseImage.setOnClickListener(v -> openImageChooser());
 
-        // Xử lý sự kiện lưu sản phẩm
-        btnSaveProduct.setOnClickListener(v -> saveProduct());
     }
 
-    // Mở trình chọn ảnh từ thư viện
     private void openImageChooser() {
         Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType("image/*"); // Chỉ chọn ảnh
+        intent.setType("image/*");
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
 
-    // Nhận kết quả sau khi chọn ảnh
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            imageUri = data.getData(); // Lưu đường dẫn ảnh đã chọn
-            imgProduct.setImageURI(imageUri); // Hiển thị ảnh lên ImageView
+            imageUri = data.getData();
+            imgProduct.setImageURI(imageUri);
         }
     }
 
-    // Lưu sản phẩm mới vào ViewModel
     private void saveProduct() {
         String name = edtProductName.getText().toString().trim();
         String priceStr = edtProductPrice.getText().toString().trim();
         String quantityStr = edtProductQuantity.getText().toString().trim();
         String description = edtProductDescription.getText().toString().trim();
-        String categoryId = "CAT_001";
-        for (var data: cateViewModel.getCategories().getValue()) {
-            if (data.getSubCategory().equalsIgnoreCase(selectedCate)) {
-                categoryId = data.getId();
-                selectedCate = "";
-                break;
-            }
+
+        // Validate inputs
+        if (name.isEmpty()) {
+            edtProductName.setError("Vui lòng nhập tên sản phẩm");
+            return;
+        }
+        if (priceStr.isEmpty()) {
+            edtProductPrice.setError("Vui lòng nhập giá");
+            return;
+        }
+        if (quantityStr.isEmpty()) {
+            edtProductQuantity.setError("Vui lòng nhập số lượng");
+            return;
+        }
+        if (description.isEmpty()) {
+            edtProductDescription.setError("Vui lòng nhập mô tả");
+            return;
+        }
+        if (selectedCate.isEmpty()) {
+            Toast.makeText(this, "Vui lòng chọn danh mục", Toast.LENGTH_SHORT).show();
+            return;
         }
 
-
-        if (name.isEmpty() || priceStr.isEmpty() || quantityStr.isEmpty() || description.isEmpty()) {
-            edtProductName.setError("Vui lòng nhập tên sản phẩm");
-            edtProductPrice.setError("Vui lòng nhập giá");
-            edtProductQuantity.setError("Vui lòng nhập số lượng");
-            edtProductDescription.setError("Vui lòng nhập mô tả");
-            selectedCate = "";
-            return;
+        // Find category ID
+        String categoryId = "CAT_001"; // Default
+        List<Category> categoryList = cateViewModel.getCategories().getValue();
+        if (categoryList != null) {
+            for (Category data : categoryList) {
+                if (data.getSubCategory().equalsIgnoreCase(selectedCate)) {
+                    categoryId = data.getId();
+                    break;
+                }
+            }
         }
 
         double price = Double.parseDouble(priceStr);
         int quantity = Integer.parseInt(quantityStr);
-        String image = (imageUri != null) ? imageUri.toString() : ""; // Lưu đường dẫn ảnh nếu có
+        String image = (imageUri != null) ? imageUri.toString() : "";
 
         Product product = new Product(image, categoryId, description, price, quantity, name);
         productViewModel.addProduct(product);
 
-        finish(); // Đóng activity sau khi lưu
+        Toast.makeText(this, "Sản phẩm đã được lưu", Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     private void setCategories() {
         cateViewModel.getCategories().observe(this, categoryList -> {
-            if (categoryList != null && categoryList.size() > 0) {
+            if (categoryList != null && !categoryList.isEmpty()) {
                 categories.clear();
-                categories.add("Select category...");
+                categories.add("Select category..."); // Add placeholder first
+
                 for (Category c : categoryList) {
-
+                    if (c != null) {
                         categories.add(c.getSubCategory());
-
+                    }
                 }
+
                 categoryAdapter.notifyDataSetChanged();
+                Log.d("Product", "Categories loaded: " + categories.size());
             }
         });
     }
