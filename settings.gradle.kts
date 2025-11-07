@@ -22,5 +22,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "MilkStoreMobile_FronEnd"
+rootProject.name = "MilkStore"
 include(":app")

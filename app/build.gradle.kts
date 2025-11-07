@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.milkstoremobile_fronend"
+    namespace = "com.milkstore"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.milkstoremobile_fronend"
+        applicationId = "com.milkstore"
         minSdk = 24
         targetSdk = 35
         versionCode = 1

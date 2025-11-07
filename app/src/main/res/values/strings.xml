@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MilkStoreMobile_FronEnd</string>
+    <string name="app_name">MilkStore</string>
     <string name="milk">Milk</string>
     <string name="category">Category</string>
     <string name="chat">Chat</string>
